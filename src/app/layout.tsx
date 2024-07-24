@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import SystemTheme from "@/components/SystemTheme";
 import Navbar from "@/components/Navbar";
+import { ThemeProvider } from "@/components/providers/ThemeProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,8 +20,15 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={cn(inter.className, "w-screen h-screen")}>
-				<Navbar />
-				<SystemTheme>{children}</SystemTheme>
+				<ThemeProvider
+					attribute="class"
+					defaultTheme="system"
+					enableSystem
+					// disableTransitionOnChange
+				>
+					<Navbar />
+					{children}
+				</ThemeProvider>
 			</body>
 		</html>
 	);
